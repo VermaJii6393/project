@@ -208,3 +208,24 @@ button:hover {
         transform: translateY(0);
     }
 }
+.buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+/* TOP BOX (login/signup) */
+.auth-box,
+.feature-box {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+
+/* keep buttons consistent */
+.btn {
+    width: 220px;
+    text-align: center;
+}

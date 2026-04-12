@@ -21,18 +21,26 @@
 
     <div class="buttons">
 
-        <!-- MAIN FEATURES -->
-        <a href="/ask" class="btn">🤖 Ask AI</a>
-        <a href="/connect" class="btn">👥 Connect</a>
-        <a href="/classroom" class="btn">🏫 Class Chat</a>
+        <!-- 🔼 TOP SECTION: LOGIN / SIGNUP -->
+        <div class="auth-box">
 
-        <!-- LOGIN / LOGOUT SYSTEM -->
-        {% if user %}
-            <a href="/logout" class="btn">🚪 Logout</a>
-        {% else %}
-            <a href="/signup" class="btn">📝 Signup</a>
-            <a href="/login" class="btn">🔐 Login</a>
-        {% endif %}
+            {% if user %}
+                <a href="/logout" class="btn">🚪 Logout</a>
+            {% else %}
+                <a href="/signup" class="btn">📝 Signup</a>
+                <a href="/login" class="btn">🔐 Login</a>
+            {% endif %}
+
+        </div>
+
+        <!-- 🔽 BOTTOM SECTION: FEATURES -->
+        <div class="feature-box">
+
+            <a href="/ask" class="btn">🤖 Ask AI</a>
+            <a href="/connect" class="btn">👥 Connect</a>
+            <a href="/classroom" class="btn">🏫 Class Chat</a>
+
+        </div>
 
     </div>
 
