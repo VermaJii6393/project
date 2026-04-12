@@ -236,3 +236,147 @@ button:hover {
     width: 150px;
     text-align: center;
 }
+/* ================= SAFE MOBILE FIX (NO DESIGN CHANGE) ================= */
+@media (max-width: 768px) {
+
+    body {
+        overflow-x: hidden;
+    }
+
+    .container,
+    .chat-container,
+    .connect-container {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    /* Keep same row layout but allow shrink */
+    .buttons,
+    .card-container {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .btn {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+
+    .card {
+        transform: scale(0.9);
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    input, button {
+        font-size: 14px;
+    }
+}
+/* ================= FINAL SAFE LAYOUT FIX (NO DESIGN CHANGE) ================= */
+@media (max-width: 768px) {
+
+    body {
+        overflow-x: hidden;
+    }
+
+    /* HOME PAGE FIX */
+    .container {
+        width: 100%;
+        padding: 15px;
+        box-sizing: border-box;
+        transform: translate(-50%, -50%) scale(0.95);
+    }
+
+    /* BUTTON ROW FIX (keep same design, only fit) */
+    .buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .btn {
+        font-size: 14px;
+        padding: 10px 16px;
+        margin: 6px;
+    }
+
+    /* CONNECT + CHAT + OTHER PAGES */
+    .chat-container,
+    .connect-container {
+        width: 95%;
+        margin: auto;
+        box-sizing: border-box;
+    }
+
+    .card-container {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .card {
+        transform: scale(0.95);
+    }
+
+    /* TEXT ONLY SCALE (NO DESIGN CHANGE) */
+    h1 { font-size: 28px; }
+    h2 { font-size: 24px; }
+}
+/* ================= ANDROID / PHONE ONLY FIX (NO DESKTOP CHANGE) ================= */
+@media (max-width: 768px) {
+
+    body {
+        overflow-x: hidden;
+    }
+
+    /* HOME PAGE CENTER FIX (ONLY MOBILE) */
+    body.home .container {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        transform: none !important;
+        width: 100%;
+        padding: 15px;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    /* BUTTONS STAY SAME DESIGN, ONLY FIT */
+    .buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .btn {
+        font-size: 14px;
+        padding: 10px 14px;
+        margin: 6px;
+        min-width: 120px;
+    }
+
+    /* CONNECT + CHAT + CARDS */
+    .chat-container,
+    .connect-container {
+        width: 95%;
+        margin: auto;
+        box-sizing: border-box;
+    }
+
+    .card-container {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .card {
+        transform: scale(0.95);
+    }
+
+    /* TEXT ONLY SCALE */
+    h1 { font-size: 26px; }
+    h2 { font-size: 22px; }
+}

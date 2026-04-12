@@ -1,3 +1,4 @@
+import os
 import sqlite3
 from flask import Flask, render_template, request, session, redirect, url_for
 
@@ -222,5 +223,6 @@ def send_message():
     return redirect(url_for("classroom"))
 
 # ===================== RUN =====================
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=10000)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
