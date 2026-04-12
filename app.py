@@ -137,31 +137,45 @@ def ask():
     question = ""
 
     if request.method == "POST":
-        question = request.form.get("question", "").lower()
+        question = request.form.get("question", "").lower().strip()
 
-        best_match = None
-        best_score = 0
+        # ================= GREETING CHAT =================
+        greetings = ["hello", "hi", "hey", "hii", "good morning", "good evening"]
 
-        for key in data:
-            score = 0
-            for word in key.split():
-                if word in question:
-                    score += 1
+        if any(greet in question for greet in greetings):
+            answer = "👋 Hi there! How can I help you today about BBD University?"
 
-            if key in question:
-                score += 2
+        # ================= BASIC CHAT FLOW =================
+        elif "how are you" in question:
+            answer = "😊 I'm good! I'm here to help you with college info."
 
-            if score > best_score:
-                best_score = score
-                best_match = key
+        elif "thank" in question:
+            answer = "🙏 You're welcome!"
 
-        if best_match:
-            answer = data[best_match]
+        # ================= YOUR EXISTING DATA =================
         else:
-            answer = "🤖 Sorry, I don't have exact info."
+            best_match = None
+            best_score = 0
+
+            for key in data:
+                score = 0
+                for word in key.split():
+                    if word in question:
+                        score += 1
+
+                if key in question:
+                    score += 2
+
+                if score > best_score:
+                    best_score = score
+                    best_match = key
+
+            if best_match:
+                answer = data[best_match]
+            else:
+                answer = "🤖 I’m not fully sure, but I’m learning! Try asking in another way.SIMPLE AND ONE WORD ACCORDING TO YOUR QUERY"
 
     return render_template("ask.html", answer=answer, question=question)
-
 # ===================== CONNECT =====================
 @app.route("/connect")
 def connect():
