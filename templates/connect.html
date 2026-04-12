@@ -2,7 +2,10 @@
 <html>
 <head>
     <title>Connect</title>
-    <link rel="stylesheet" href="/static/style.css">
+
+    <!-- FIXED CSS LINK -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -22,21 +25,21 @@
 
             <div class="card">
                 <a href="mailto:senior1@college.com">
-                    <img src="/static/user.png">
+                    <img src="{{ url_for('static', filename='user.png') }}">
                     <p>Rahul<br><small>Final Year - DSA</small></p>
                 </a>
             </div>
 
             <div class="card">
                 <a href="mailto:senior2@college.com">
-                    <img src="/static/user.png">
+                    <img src="{{ url_for('static', filename='user.png') }}">
                     <p>Aman<br><small>Web Dev Expert</small></p>
                 </a>
             </div>
 
             <div class="card">
                 <a href="mailto:senior3@college.com">
-                    <img src="/static/user.png">
+                    <img src="{{ url_for('static', filename='user.png') }}">
                     <p>Sneha<br><small>AI/ML</small></p>
                 </a>
             </div>
@@ -52,21 +55,21 @@
 
             <div class="card">
                 <a href="mailto:teacher1@college.com">
-                    <img src="/static/user.png">
+                    <img src="{{ url_for('static', filename='user.png') }}">
                     <p>Dr. Sharma<br><small>HOD - CSE</small></p>
                 </a>
             </div>
 
             <div class="card">
                 <a href="mailto:teacher2@college.com">
-                    <img src="/static/user.png">
+                    <img src="{{ url_for('static', filename='user.png') }}">
                     <p>Prof. Singh<br><small>Data Science</small></p>
                 </a>
             </div>
 
             <div class="card">
                 <a href="mailto:teacher3@college.com">
-                    <img src="/static/user.png">
+                    <img src="{{ url_for('static', filename='user.png') }}">
                     <p>Dr. Verma<br><small>AI Expert</small></p>
                 </a>
             </div>

@@ -2,7 +2,10 @@
 <html>
 <head>
     <title>College AI Chat</title>
-    <link rel="stylesheet" href="/static/style.css">
+
+    <!-- FIXED CSS LINK -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -37,7 +40,7 @@
     </div>
 
     <!-- INPUT AREA -->
-    <form method="POST" class="input-area">
+    <form method="POST" action="/ask" class="input-area">
         <input type="text" name="question" placeholder="Type your question..." required>
         <button type="submit">Send</button>
     </form>

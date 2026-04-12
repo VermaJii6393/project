@@ -2,7 +2,10 @@
 <html>
 <head>
     <title>College Help System</title>
-    <link rel="stylesheet" href="/static/style.css">
+
+    <!-- Correct static linking (Flask best practice) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -21,7 +24,7 @@
         <!-- CONNECT PAGE -->
         <a href="/connect" class="btn">👥 Connect</a>
 
-        <!-- NEW: CLASSROOM CHAT -->
+        <!-- CLASSROOM CHAT -->
         <a href="/classroom" class="btn">🏫 Class Chat</a>
 
     </div>

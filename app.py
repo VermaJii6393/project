@@ -1,105 +1,133 @@
-chat_messages = []
-from flask import Flask, render_template, request
+import sqlite3
+from flask import Flask, render_template, request, session, redirect, url_for
 
 app = Flask(__name__)
+app.secret_key = "secret123"
 
-# ===================== COLLEGE AI DATA (OLD + SAFE) =====================
+# ===================== DATABASE =====================
+def init_db():
+    conn = sqlite3.connect("users.db")
+    c = conn.cursor()
+
+    c.execute("""
+    CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        email TEXT,
+        password TEXT,
+        role TEXT
+    )
+    """)
+
+    conn.commit()
+    conn.close()
+
+init_db()
+
+# ===================== COLLEGE AI DATA (SAFE) =====================
 data = {
-
-    # 📚 LIBRARY
-    "library": "📚 BBD University Library is located on the 6th floor. Freshers can get a library card by filling a form provided by the coordinator and submitting it to the library office.",
-
-    "library card": "📚 Freshers receive library cards after filling a form given by the class coordinator and submitting it in the library (6th floor).",
-
-    # 🪪 ID CARD
-    "id card": "🪪 ID Card is provided by the coordinator after a few weeks of admission. If lost, students can reissue it with help of their Class CR or Coordinator.",
-
-    "identity card": "🪪 Identity card is issued by coordinator after some weeks. If lost, students must contact CR or coordinator for reissue.",
-
-    # 🏠 HOSTEL
-    "hostel": "🏠 Hostel facility is available with separate blocks for boys and girls. Contact hostel warden or coordinator for allocation.",
-
-    # 💰 SCHOLARSHIP
-    "scholarship": "💰 Apply for UP Scholarship through official portal. Documents must be submitted on time through college instructions.",
-
-    # 📶 WIFI
-    "wifi": "📶 Campus WiFi is available in academic blocks and hostels after registration in IT department.",
-
-    # 🚌 TRANSPORT
-    "bus": "🚌 College provides bus transport facilities across Lucknow routes for students and staff.",
-
-    # 🚗 VEHICLE
-    "vehicle": "🚗 Students are allowed to bring vehicles, but they must have a special vehicle permission card. This form is provided by the coordinator and must be placed on the vehicle for entry inside campus.",
-
-    "bike": "🚗 Bike or car entry is allowed only with official vehicle permission card issued by coordinator.",
-
-    # 👕 DRESS CODE
-    "dress code": "👕 College dress code includes white shirt with black/blue trousers. It is recommended but not strictly mandatory.",
-
-    "uniform": "👕 Students usually wear white shirt with black/blue trousers. It is not strictly enforced.",
-
-    # 🎉 EVENTS
-    "program": "🎉 BBD University organizes small programs regularly. Major events include 'Utkarsh' and 'Star Night' which are large annual celebrations.",
-
-    "event": "🎉 College conducts multiple cultural and academic events. Major ones are Utkarsh and Star Night.",
-
-    "star night": "🌟 Star Night is a major cultural event with performances, celebrities and student participation.",
-
-    "utkarsh": "🏆 Utkarsh is a major annual fest of BBD University with competitions, cultural events and prizes.",
-
-    # 🏫 CAMPUS
-    "campus": "🏫 BBDU campus includes library, hostels, academic blocks, sports stadium, cafeteria and medical facilities.",
-
-    # 📝 EXAM
-    "exam": "📝 Exams are conducted semester-wise. Students should check official notices or department updates.",
-
-    # 📊 ATTENDANCE
-    "attendance": "📊 Minimum attendance rules are decided by department. Students should maintain regular attendance.",
-
-    # 🪪 LOST ID HELP
-    "lost id": "🪪 If ID card is lost, students should contact their Class CR or Coordinator for reissue procedure.",
-
-    # 🎓 PLACEMENT
-    "placement": "🎓 For placement details, students should visit the official BBD University website (bbdu.ac.in) or placement cell.",
-
-    "job": "🎓 Placement and job-related information is available only on official university website or placement cell.",
-    # late fees
-    "late fees": "💰 Late fees may apply for submissions beyond the deadline. Last date provide in Official group .",
-    #canteen
-    "canteen": "�️ The college has a well-equipped canteen providing meals and snacks at reasonable prices.it have Kharray & other 2 canteens in that campus ",
-    #fees counter/department
-    "fees": "💰 Fees information can be obtained from the fees counter or department office.In BBDITM main building ground floor",
-    # 📞 CONTACt
-    "contact": "📞 For official queries, visit bbdu.ac.in or contact university administration office."
-
-
+    "library": "📚 BBD University Library is located on the 6th floor...",
+    "library card": "📚 Freshers receive library cards...",
+    "id card": "🪪 ID Card is provided by the coordinator...",
+    "identity card": "🪪 Identity card is issued by coordinator...",
+    "hostel": "🏠 Hostel facility is available...",
+    "scholarship": "💰 Apply for UP Scholarship...",
+    "wifi": "📶 Campus WiFi is available...",
+    "bus": "🚌 College provides bus transport...",
+    "vehicle": "🚗 Students are allowed to bring vehicles...",
+    "bike": "🚗 Bike or car entry is allowed...",
+    "dress code": "👕 College dress code includes...",
+    "uniform": "👕 Students usually wear...",
+    "program": "🎉 BBD University organizes programs...",
+    "event": "🎉 College conducts events...",
+    "star night": "🌟 Star Night is a major event...",
+    "utkarsh": "🏆 Utkarsh is a major fest...",
+    "campus": "🏫 BBDU campus includes...",
+    "exam": "📝 Exams are conducted semester-wise...",
+    "attendance": "📊 Minimum attendance rules...",
+    "lost id": "🪪 If ID card is lost...",
+    "placement": "🎓 Placement details available...",
+    "job": "🎓 Job-related info available...",
+    "late fees": "💰 Late fees may apply...",
+    "canteen": "🍽️ The college has a canteen...",
+    "fees": "💰 Fees info at ground floor...",
+    "contact": "📞 For queries visit website..."
 }
 
-# ===================== CLASSROOM CHAT STORAGE =====================
+# ===================== CHAT STORAGE =====================
 chat_messages = []
 
 # ===================== HOME =====================
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return render_template("index.html", user=session.get("user"), role=session.get("role"))
 
+# ===================== SIGNUP =====================
+@app.route("/signup", methods=["GET", "POST"])
+def signup():
+    if request.method == "POST":
+        name = request.form["name"]
+        email = request.form["email"]
+        password = request.form["password"]
+        role = request.form["role"]
 
-# ===================== AI CHAT (IMPROVED VERSION) =====================
+        conn = sqlite3.connect("users.db")
+        c = conn.cursor()
+
+        c.execute("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)",
+                  (name, email, password, role))
+
+        conn.commit()
+        conn.close()
+
+        return redirect("/login")
+
+    return render_template("signup.html")
+
+# ===================== LOGIN =====================
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        email = request.form["email"]
+        password = request.form["password"]
+
+        conn = sqlite3.connect("users.db")
+        c = conn.cursor()
+
+        c.execute("SELECT * FROM users WHERE email=? AND password=?", (email, password))
+        user = c.fetchone()
+
+        conn.close()
+
+        if user:
+            session["user"] = user[1]
+            session["role"] = user[4]
+            return redirect("/")
+        else:
+            return "Invalid email or password"
+
+    return render_template("login.html")
+
+# ===================== LOGOUT =====================
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect("/")
+
+# ===================== AI CHAT =====================
 @app.route("/ask", methods=["GET", "POST"])
 def ask():
     answer = ""
     question = ""
 
     if request.method == "POST":
-        question = request.form["question"].lower()
+        question = request.form.get("question", "").lower()
 
         best_match = None
         best_score = 0
 
-        # SMART MATCHING (IMPROVED AI LOGIC)
         for key in data:
             score = 0
-
             for word in key.split():
                 if word in question:
                     score += 1
@@ -114,33 +142,29 @@ def ask():
         if best_match:
             answer = data[best_match]
         else:
-            answer = "🤖 Sorry, I don't have exact info. Please contact CR or admin."
+            answer = "🤖 Sorry, I don't have exact info."
 
     return render_template("ask.html", answer=answer, question=question)
 
-
-# ===================== CONNECT PAGE =====================
+# ===================== CONNECT =====================
 @app.route("/connect")
 def connect():
     return render_template("connect.html")
 
-
-# ===================== CLASSROOM CHAT =====================
+# ===================== CLASSROOM =====================
 @app.route("/classroom")
 def classroom():
     return render_template("classroom.html", messages=chat_messages)
 
-
 @app.route("/send_message", methods=["POST"])
 def send_message():
-    message = request.form["message"]
+    message = request.form.get("message")
 
     if message:
         chat_messages.append(message)
 
-    return render_template("classroom.html", messages=chat_messages)
+    return redirect(url_for("classroom"))
 
-
-# ===================== RUN APP ==================
+# ===================== RUN =====================
 if __name__ == "__main__":
     app.run(debug=True)
