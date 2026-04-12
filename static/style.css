@@ -1,25 +1,34 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-
-    background-image: url('/static/bbd.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     min-height: 100vh;
 }
 
-/* Dark overlay */
+/* DARK OVERLAY */
 body::before {
     content: "";
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     background: rgba(0, 0, 0, 0.6);
     z-index: 0;
     pointer-events: none;
+}
+
+/* PAGE BACKGROUNDS */
+body.home {
+    background: url('/static/bbd.jpg') no-repeat center/cover;
+}
+
+body.ask {
+    background: linear-gradient(135deg, #141e30, #243b55);
+}
+
+body.connect {
+    background: linear-gradient(135deg, #0f2027, #2c5364);
+}
+
+body.classroom {
+    background: linear-gradient(135deg, #1c1c1c, #2c3e50);
 }
 
 /* MAIN CONTAINERS */
@@ -33,11 +42,12 @@ body::before {
     animation: fadeIn 1s ease-in-out;
 }
 
-/* HOME CENTER ALIGN */
+/* PERFECT CENTER (HOME) */
 .container {
+    position: absolute;
     top: 50%;
-    transform: translateY(-50%);
-    position: relative;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 /* HEADINGS */
@@ -68,13 +78,14 @@ h2 {
     border-radius: 10px;
     font-weight: bold;
     transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
 .btn:hover {
     background: #0072ff;
 }
 
-/* CHAT BOX */
+/* CHAT */
 .chat-container {
     width: 80%;
     max-width: 600px;
@@ -108,10 +119,9 @@ h2 {
 .bot {
     background: #444;
     margin-right: auto;
-    text-align: left;
 }
 
-/* INPUT AREA */
+/* INPUT */
 .input-area {
     display: flex;
     gap: 10px;
@@ -132,7 +142,6 @@ button {
     color: white;
     border-radius: 8px;
     cursor: pointer;
-    font-weight: bold;
 }
 
 button:hover {
@@ -179,23 +188,6 @@ button:hover {
 .card:hover {
     transform: scale(1.05);
     box-shadow: 0 0 15px rgba(0,198,255,0.6);
-}
-
-/* PAGE BACKGROUNDS */
-body.home {
-    background-image: url('/static/bbd.jpg');
-}
-
-body.ask {
-    background: linear-gradient(135deg, #141e30, #243b55);
-}
-
-body.connect {
-    background: linear-gradient(135deg, #0f2027, #2c5364);
-}
-
-body.classroom {
-    background: linear-gradient(135deg, #1c1c1c, #2c3e50);
 }
 
 /* ANIMATION */

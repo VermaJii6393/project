@@ -3,9 +3,7 @@
 <head>
     <title>College Help System</title>
 
-    <!-- Correct static linking (Flask best practice) -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -16,16 +14,25 @@
     <h1>🎓 BBD College Help System</h1>
     <p>Your smart assistant for college life</p>
 
+    <!-- 👤 USER INFO -->
+    {% if user %}
+        <p>👋 Welcome, <b>{{ user }}</b> ({{ role }})</p>
+    {% endif %}
+
     <div class="buttons">
 
-        <!-- AI CHAT -->
+        <!-- MAIN FEATURES -->
         <a href="/ask" class="btn">🤖 Ask AI</a>
-
-        <!-- CONNECT PAGE -->
         <a href="/connect" class="btn">👥 Connect</a>
-
-        <!-- CLASSROOM CHAT -->
         <a href="/classroom" class="btn">🏫 Class Chat</a>
+
+        <!-- LOGIN / LOGOUT SYSTEM -->
+        {% if user %}
+            <a href="/logout" class="btn">🚪 Logout</a>
+        {% else %}
+            <a href="/signup" class="btn">📝 Signup</a>
+            <a href="/login" class="btn">🔐 Login</a>
+        {% endif %}
 
     </div>
 
