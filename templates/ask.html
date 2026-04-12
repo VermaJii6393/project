@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>College AI Chat</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body class="ask">
+
+<a href="/" class="btn">⬅ Back</a>
+
+<div class="chat-container">
+
+    <h2>🤖 College AI Assistant</h2>
+
+    <div class="chat-box">
+
+        <!-- USER QUESTION -->
+        {% if question %}
+            <div class="message user">
+                {{ question }}
+            </div>
+        {% endif %}
+
+        <!-- AI ANSWER -->
+        {% if answer %}
+            <div class="message bot">
+                {{ answer }}
+            </div>
+        {% else %}
+            <div class="message bot">
+                Hello 👋 Ask me anything about BBD University!
+            </div>
+        {% endif %}
+
+    </div>
+
+    <!-- INPUT AREA -->
+    <form method="POST" class="input-area">
+        <input type="text" name="question" placeholder="Type your question..." required>
+        <button type="submit">Send</button>
+    </form>
+
+</div>
+
+</body>
+</html>
