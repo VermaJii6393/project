@@ -212,20 +212,27 @@ button:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 25px;
+    gap: 30px;
 }
 
-/* TOP BOX (login/signup) */
-.auth-box,
+/* TOP ROW: Login + Signup */
+.auth-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* BOTTOM ROW: Ask AI + Connect + Chat */
 .feature-box {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    gap: 15px;
 }
 
-/* keep buttons consistent */
+/* BUTTON STYLE */
 .btn {
-    width: 220px;
+    width: 150px;
     text-align: center;
 }
