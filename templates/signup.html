@@ -7,6 +7,11 @@
 
 <body class="ask">
 
+<!-- ================= LOADING SCREEN ================= -->
+<div id="loading-screen">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Loading Logo">
+</div>
+
 <div class="chat-container">
 
     <h2>📝 Signup</h2>
@@ -17,9 +22,10 @@
 
         <input type="email" name="email" placeholder="Email" required><br><br>
 
-        <input type="text" name="number" placeholder="Phone Number" required><br><br>
+        <!-- OPTIONAL INFO (NOT SAVED IN DB, JUST UI) -->
+        <input type="text" name="number" placeholder="Phone Number"><br><br>
 
-        <input type="text" name="branch" placeholder="Branch" required><br><br>
+        <input type="text" name="branch" placeholder="Branch"><br><br>
 
         <select name="role" required>
             <option value="fresher">Fresher</option>
@@ -36,6 +42,18 @@
     </form>
 
 </div>
+
+<!-- ================= LOADING SCRIPT ================= -->
+<script>
+    window.addEventListener("load", function () {
+        setTimeout(function () {
+            let loader = document.getElementById("loading-screen");
+            if (loader) {
+                loader.style.display = "none";
+            }
+        }, 1500);
+    });
+</script>
 
 </body>
 </html>
