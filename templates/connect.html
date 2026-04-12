@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Connect</title>
+    <title>Connect Hub</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
@@ -16,28 +16,62 @@
 
     <h2>👥 Connect Hub</h2>
 
-    <!-- SENIORS + TEACHERS (DYNAMIC FROM DATABASE) -->
+    <!-- ================= FRESHER COUNT ONLY ================= -->
     <div class="section">
-        <h3>🎓 Seniors & Teachers</h3>
+        <div class="card-container">
+
+            <div class="card">
+                <h3>👨‍🎓 Freshers</h3>
+                <p>{{ fresher_count }}</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ================= SENIORS (STATIC 3 CARDS) ================= -->
+    <div class="section">
+        <h3>🎓 Seniors</h3>
 
         <div class="card-container">
 
-            {% if users %}
+            <div class="card">
+                <img src="{{ url_for('static', filename='user.png') }}">
+                <p>Rahul Kumar Yadav<br><small>Senior</small></p>
+            </div>
 
-                {% for user in users %}
-                <div class="card">
-                    <img src="{{ url_for('static', filename='user.png') }}">
+            <div class="card">
+                <img src="{{ url_for('static', filename='user.png') }}">
+                <p>Vaibhav Jaiswal<br><small>Senior</small></p>
+            </div>
 
-                    <p>
-                        {{ user[0] }}<br>
-                        <small>{{ user[1] }}</small>
-                    </p>
-                </div>
-                {% endfor %}
+            <div class="card">
+                <img src="{{ url_for('static', filename='user.png') }}">
+                <p>Ganga Sagar Pandey<br><small>Senior</small></p>
+            </div>
 
-            {% else %}
-                <p>No users available yet.</p>
-            {% endif %}
+        </div>
+    </div>
+
+    <!-- ================= TEACHERS (STATIC 3 CARDS) ================= -->
+    <div class="section">
+        <h3>📘 Teachers</h3>
+
+        <div class="card-container">
+
+            <div class="card">
+                <img src="{{ url_for('static', filename='user.png') }}">
+                <p>U.S Shukla<br><small>Teacher</small></p>
+            </div>
+
+            <div class="card">
+                <img src="{{ url_for('static', filename='user.png') }}">
+                <p>Akhilesh Kumar Maurya<br><small>Teacher</small></p>
+            </div>
+
+            <div class="card">
+                <img src="{{ url_for('static', filename='user.png') }}">
+                <p>Dr. Anjali Awasthi<br><small>Teacher</small></p>
+            </div>
 
         </div>
     </div>

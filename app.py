@@ -182,12 +182,31 @@ def connect():
     conn = sqlite3.connect("users.db")
     c = conn.cursor()
 
+    # ONLY seniors + teachers for cards
     c.execute("SELECT name, role FROM users WHERE role IN ('teacher', 'senior')")
-    users = c.fetchall()
+    db_users = c.fetchall()
+
+    # COUNT ONLY freshers
+    c.execute("SELECT COUNT(*) FROM users WHERE role='fresher'")
+    fresher_count = c.fetchone()[0]
+
+    # COUNT seniors
+    c.execute("SELECT COUNT(*) FROM users WHERE role='senior'")
+    senior_count = c.fetchone()[0]
+
+    # COUNT teachers
+    c.execute("SELECT COUNT(*) FROM users WHERE role='teacher'")
+    teacher_count = c.fetchone()[0]
 
     conn.close()
 
-    return render_template("connect.html", users=users)
+    return render_template(
+        "connect.html",
+        db_users=db_users,
+        fresher_count=fresher_count,
+        senior_count=senior_count,
+        teacher_count=teacher_count
+    )
 # ===================== CLASSROOM =====================
 @app.route("/classroom")
 def classroom():
