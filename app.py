@@ -2,7 +2,7 @@ import sqlite3
 from flask import Flask, render_template, request, session, redirect, url_for
 
 app = Flask(__name__)
-app.secret_key = "secret123"
+app.secret_key = "Fresher_drive_63"
 
 # ===================== DATABASE =====================
 def init_db():
