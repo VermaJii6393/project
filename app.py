@@ -179,8 +179,15 @@ def ask():
 # ===================== CONNECT =====================
 @app.route("/connect")
 def connect():
-    return render_template("connect.html")
+    conn = sqlite3.connect("users.db")
+    c = conn.cursor()
 
+    c.execute("SELECT name, role FROM users WHERE role IN ('teacher', 'senior')")
+    users = c.fetchall()
+
+    conn.close()
+
+    return render_template("connect.html", users=users)
 # ===================== CLASSROOM =====================
 @app.route("/classroom")
 def classroom():

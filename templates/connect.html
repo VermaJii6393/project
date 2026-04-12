@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <title>Connect</title>
 
@@ -16,62 +16,28 @@
 
     <h2>👥 Connect Hub</h2>
 
-    <!-- Seniors -->
+    <!-- SENIORS + TEACHERS (DYNAMIC FROM DATABASE) -->
     <div class="section">
-        <h3>🎓 Seniors</h3>
+        <h3>🎓 Seniors & Teachers</h3>
 
         <div class="card-container">
 
-            <div class="card">
-                <a href="mailto:senior1@college.com">
-                    <img src="{{ url_for('static', filename='user.png') }}" alt="user">
-                    <p>Rahul<br><small>Final Year - DSA</small></p>
-                </a>
-            </div>
+            {% if users %}
 
-            <div class="card">
-                <a href="mailto:senior2@college.com">
-                    <img src="{{ url_for('static', filename='user.png') }}" alt="user">
-                    <p>Aman<br><small>Web Dev Expert</small></p>
-                </a>
-            </div>
+                {% for user in users %}
+                <div class="card">
+                    <img src="{{ url_for('static', filename='user.png') }}">
 
-            <div class="card">
-                <a href="mailto:senior3@college.com">
-                    <img src="{{ url_for('static', filename='user.png') }}" alt="user">
-                    <p>Sneha<br><small>AI/ML</small></p>
-                </a>
-            </div>
+                    <p>
+                        {{ user[0] }}<br>
+                        <small>{{ user[1] }}</small>
+                    </p>
+                </div>
+                {% endfor %}
 
-        </div>
-    </div>
-
-    <!-- Teachers -->
-    <div class="section">
-        <h3>📘 Teachers</h3>
-
-        <div class="card-container">
-
-            <div class="card">
-                <a href="mailto:teacher1@college.com">
-                    <img src="{{ url_for('static', filename='user.png') }}" alt="user">
-                    <p>Dr. Sharma<br><small>HOD - CSE</small></p>
-                </a>
-            </div>
-
-            <div class="card">
-                <a href="mailto:teacher2@college.com">
-                    <img src="{{ url_for('static', filename='user.png') }}" alt="user">
-                    <p>Prof. Singh<br><small>Data Science</small></p>
-                </a>
-            </div>
-
-            <div class="card">
-                <a href="mailto:teacher3@college.com">
-                    <img src="{{ url_for('static', filename='user.png') }}" alt="user">
-                    <p>Dr. Verma<br><small>AI Expert</small></p>
-                </a>
-            </div>
+            {% else %}
+                <p>No users available yet.</p>
+            {% endif %}
 
         </div>
     </div>
