@@ -2,26 +2,40 @@
 <html>
 <head>
     <title>Signup</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body>
 
-<h2>Signup</h2>
+<body class="ask">
 
-<form method="POST">
-    <input type="text" name="name" placeholder="Name" required><br><br>
-    <input type="email" name="email" placeholder="Email" required><br><br>
-    <input type="password" name="password" placeholder="Password" required><br><br>
+<div class="chat-container">
 
-    <select name="role">
-        <option value="junior">Junior</option>
-        <option value="senior">Senior</option>
-        <option value="teacher">Teacher</option>
-    </select><br><br>
+    <h2>📝 Signup</h2>
 
-    <button type="submit">Signup</button>
-</form>
+    <form method="POST">
 
-<a href="/login">Already have account? Login</a>
+        <input type="text" name="name" placeholder="Full Name" required><br><br>
+
+        <input type="email" name="email" placeholder="Email" required><br><br>
+
+        <input type="text" name="number" placeholder="Phone Number" required><br><br>
+
+        <input type="text" name="branch" placeholder="Branch" required><br><br>
+
+        <select name="role" required>
+            <option value="fresher">Fresher</option>
+            <option value="senior">Senior</option>
+            <option value="teacher">Teacher</option>
+        </select><br><br>
+
+        <input type="text" name="id_card" placeholder="ID Card Number (Optional)"><br><br>
+
+        <input type="password" name="password" placeholder="Password" required><br><br>
+
+        <button type="submit">Create Account</button>
+
+    </form>
+
+</div>
 
 </body>
 </html>

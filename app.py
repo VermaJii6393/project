@@ -81,11 +81,18 @@ def signup():
         password = request.form["password"]
         role = request.form["role"]
 
+        # SAFE: ignore extra fields (no crash)
+        request.form.get("number")
+        request.form.get("branch")
+        request.form.get("id_card")
+
         conn = sqlite3.connect("users.db")
         c = conn.cursor()
 
-        c.execute("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)",
-                  (name, email, password, role))
+        c.execute("""
+            INSERT INTO users (name, email, password, role)
+            VALUES (?, ?, ?, ?)
+        """, (name, email, password, role))
 
         conn.commit()
         conn.close()
@@ -93,13 +100,13 @@ def signup():
         return redirect("/login")
 
     return render_template("signup.html")
-
 # ===================== LOGIN =====================
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        email = request.form["email"]
-        password = request.form["password"]
+
+        email = request.form.get("email")
+        password = request.form.get("password")
 
         conn = sqlite3.connect("users.db")
         c = conn.cursor()
@@ -117,7 +124,6 @@ def login():
             return "Invalid email or password"
 
     return render_template("login.html")
-
 # ===================== LOGOUT =====================
 @app.route("/logout")
 def logout():

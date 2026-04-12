@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="ask">
+
+<div class="chat-container">
+
+    <h2>🔐 Login</h2>
+
+    <form method="POST">
+
+        <input type="text" name="id_card" placeholder="ID Card Number" required><br><br>
+
+        <input type="text" name="number" placeholder="Phone Number" required><br><br>
+
+        <button type="submit">Login</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
