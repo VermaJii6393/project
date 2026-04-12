@@ -63,9 +63,16 @@ data = {
     "placement": "🎓 For placement details, students should visit the official BBD University website (bbdu.ac.in) or placement cell.",
 
     "job": "🎓 Placement and job-related information is available only on official university website or placement cell.",
-
-    # 📞 CONTACT
+    # late fees
+    "late fees": "💰 Late fees may apply for submissions beyond the deadline. Last date provide in Official group .",
+    #canteen
+    "canteen": "�️ The college has a well-equipped canteen providing meals and snacks at reasonable prices.it have Kharray & other 2 canteens in that campus ",
+    #fees counter/department
+    "fees": "💰 Fees information can be obtained from the fees counter or department office.In BBDITM main building ground floor",
+    # 📞 CONTACt
     "contact": "📞 For official queries, visit bbdu.ac.in or contact university administration office."
+
+
 }
 
 # ===================== CLASSROOM CHAT STORAGE =====================
